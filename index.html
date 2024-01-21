@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSX and Babel</title>
+  <style>
+     #card {
+         border: 2px solid black;
+         border-radius: 20px;
+         padding: 10px;
+         background-color: antiquewhite;
+         width: 60%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction: column;
+         margin: auto;
+     }
+
+     #card img {
+         border-radius: 20px;
+         height: 400px;
+         width: 100%;
+     }
+
+     #input {
+         display: flex;
+         justify-content: center;
+         gap: 50px;
+     }
+
+     input {
+        font-size: 20px;
+        padding: 10px;
+        font-weight: 500;
+        border-radius: 20px;
+        border: 1px solid lightgray;
+        margin-top: 20px;
+     }
+
+     button {
+         font-size: 20px;
+         padding: 15px;
+         border-radius: 10px;
+         background-color: #FF5B22;
+         border:0;
+         cursor: pointer;
+         font-weight: bold;
+         color: white;
+         margin-top: 20px;
+     }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function BirthdayCard (){
+        let [name, setName] = React.useState("");
+        let [custom, setCustom] = React.useState("");
+         
+        function submitHandler(){
+            setName(document.getElementById('name').value);
+            setCustom(document.getElementById('custom').value);
+            document.getElementById('name').value = "";
+            document.getElementById('custom').value = "";
+        }
+
+        return (
+          <div id="card">
+            <img src="https://s3.amazonaws.com/secretsaucefiles/photos/images/000/110/767/original/5045502202_41476791a4_o.jpg?1485379928" width="500px" border-radius="20px" alt="happy"/>
+           <div id="input">
+             <input type="text" id="name" placeholder ="Enter your name"/>
+             <input type="text" id="custom" placeholder ="Enter custom message"/>
+            </div>
+            <button onClick={submitHandler}>Submit</button>
+            <h1>Happy Birthday {name.length > 5 ? <span style={{backgroundColor: "violet"}}>{name}</span> : name}! {custom}.</h1>
+          </div>  
+        );
+    }
+    
+    ReactDOM.createRoot(document.getElementById('root')).render(<BirthdayCard />);
+  </script>
+</body>
+</html>
